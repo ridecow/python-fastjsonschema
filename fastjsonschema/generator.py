@@ -6,6 +6,7 @@
 #
 
 from collections import OrderedDict
+import decimal
 import re
 
 from .exceptions import JsonSchemaException
@@ -36,9 +37,9 @@ class CodeGenerator:
     JSON_TYPE_TO_PYTHON_TYPE = {
         'null': 'NoneType',
         'boolean': 'bool',
-        'number': 'int, float',
+        'number': 'int, float, Decimal',
         'integer': 'int',
-        'string': 'str',
+        'string': 'str, unicode',
         'array': 'list',
         'object': 'dict',
     }
@@ -94,6 +95,7 @@ class CodeGenerator:
         """
         return dict(
             self._compile_regexps,
+            Decimal=decimal.Decimal,
             re=re,
             JsonSchemaException=JsonSchemaException,
         )
