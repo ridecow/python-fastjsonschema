@@ -8,7 +8,7 @@ from .generator import CodeGenerator, enforce_list
 JSON_TYPE_TO_PYTHON_TYPE = {
     'null': 'NoneType',
     'boolean': 'bool',
-    'number': 'int, float',
+    'number': 'int, float, Decimal',
     'integer': 'int',
     'string': 'str',
     'array': 'list, tuple',
@@ -69,6 +69,7 @@ class CodeGeneratorDraft04(CodeGenerator):
     def global_state(self):
         res = super().global_state
         res['custom_formats'] = self._custom_formats
+        res['Decimal'] = decimal.Decimal
         return res
 
     def generate_type(self):
